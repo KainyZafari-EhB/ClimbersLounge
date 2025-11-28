@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="be.ehb.rockhub.DashboardController"
+            stylesheets="@styles.css"
+            prefHeight="700.0" prefWidth="1000.0">
+
+    <left>
+        <VBox spacing="15" styleClass="sidebar" prefWidth="300">
+            <Label text="Nieuwe Sessie" styleClass="header-label"/>
+
+            <VBox spacing="5">
+                <Label text="Datum" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
+                <DatePicker fx:id="datePicker" maxWidth="Infinity"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Locatie" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
+                <TextField fx:id="txtLocatie" promptText="bv. Klimax"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Graad" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
+                <TextField fx:id="txtGraad" promptText="bv. 6b"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Type" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
+                <ComboBox fx:id="comboType" maxWidth="Infinity"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Label text="Notities" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
+                <TextArea fx:id="txtNotities" promptText="Hoe voelde het?" prefRowCount="3" wrapText="true"/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" /> <Button text="Voeg Sessie Toe" onAction="#onVoegToe"
+                                                   maxWidth="Infinity" styleClass="button, button-primary"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20">
+            <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+
+            <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+                <tabs>
+                    <Tab text="Lijstweergave">
+                        <content>
+                            <VBox style="-fx-padding: 10;">
+                                <ListView fx:id="listSessies" VBox.vgrow="ALWAYS" style="-fx-background-insets: 0; -fx-padding: 5;"/>
+                            </VBox>
+                        </content>
+                    </Tab>
+                    <Tab text="Progressie Grafiek">
+                        <content>
+                            <VBox style="-fx-padding: 10;">
+                                <LineChart fx:id="progressieGrafiek" title="Mijn Evolutie" legendVisible="false">
+                                    <xAxis>
+                                        <CategoryAxis label="Datum" fx:id="dateAxis"/>
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis label="Niveau" fx:id="gradeAxis" autoRanging="true" forceZeroInRange="false"/>
+                                    </yAxis>
+                                </LineChart>
+                            </VBox>
+                        </content>
+                    </Tab>
+                </tabs>
+            </TabPane>
+
+            <VBox spacing="10" styleClass="card">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="AI Coach Advies" styleClass="sub-header-label"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Vraag AI Analyse" onAction="#onVraagAi" styleClass="button, button-secondary"/>
+                </HBox>
+                <TextArea fx:id="txtAiAdvies" editable="false" wrapText="true" prefHeight="80"
+                          promptText="Druk op de knop voor advies..." style="-fx-background-color: transparent;"/>
+            </VBox>
+
+        </VBox>
+    </center>
+</BorderPane>
