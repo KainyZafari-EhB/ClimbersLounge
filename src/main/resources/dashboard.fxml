@@ -48,8 +48,15 @@
                 <tabs>
                     <Tab text="Lijstweergave">
                         <content>
-                            <VBox style="-fx-padding: 10;">
-                                <ListView fx:id="listSessies" style="-fx-background-insets: 0; -fx-padding: 5;" VBox.vgrow="ALWAYS" />
+                            <VBox style="-fx-padding: 10;" spacing="10">
+
+                                <ListView fx:id="listSessies" VBox.vgrow="ALWAYS" style="-fx-background-insets: 0; -fx-padding: 5;"/>
+
+                                <Button text="Verwijder Geselecteerde Sessie"
+                                        onAction="#onVerwijder"
+                                        maxWidth="Infinity"
+                                        style="-fx-background-color: #ff5252; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
                             </VBox>
                         </content>
                     </Tab>

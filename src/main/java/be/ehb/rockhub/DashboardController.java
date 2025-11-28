@@ -2,6 +2,7 @@ package be.ehb.rockhub;
 
 import be.ehb.rockhub.KlimSessie;
 import be.ehb.rockhub.AiService;
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -167,4 +168,26 @@ public class DashboardController {
             System.err.println("Fout bij laden data: " + e.getMessage());
             }
         }
+    @FXML
+    public void onVerwijder() {
+        // 1. Welke rij heeft de gebruiker aangeklikt?
+        int index = listSessies.getSelectionModel().getSelectedIndex();
+
+        // Als index -1 is, is er niets geselecteerd
+        if (index == -1) {
+            System.out.println("Selecteer eerst een sessie uit de lijst!");
+            return;
+        }
+
+        // 2. Verwijder de data uit de "echte" lijst
+        sessieLijst.remove(index);
+
+        // 3. Verwijder de tekst van het scherm
+        listSessies.getItems().remove(index);
+
+        updateGrafiek();
+        slaSessiesOp();
+
+        System.out.println("Sessie verwijderd.");
+    }
     }
