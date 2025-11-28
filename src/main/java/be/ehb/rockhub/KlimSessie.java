@@ -9,7 +9,9 @@ public class KlimSessie {
     private String type;  // bv. "Boulderen", "Lead"
     private String notities;
 
-    // Constructor
+    public KlimSessie(){
+
+    }
     public KlimSessie(LocalDate datum, String locatie, String graad, String type, String notities) {
         this.datum = datum;
         this.locatie = locatie;
