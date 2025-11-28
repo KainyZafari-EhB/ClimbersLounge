@@ -1,74 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="be.ehb.rockhub.DashboardController"
-            stylesheets="@styles.css"
-            prefHeight="700.0" prefWidth="1000.0">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.ehb.rockhub.DashboardController">
 
     <left>
-        <VBox spacing="15" styleClass="sidebar" prefWidth="300">
-            <Label text="Nieuwe Sessie" styleClass="header-label"/>
+        <VBox prefWidth="300" spacing="15" styleClass="sidebar">
+            <Label styleClass="header-label" text="Nieuwe Sessie" />
 
             <VBox spacing="5">
-                <Label text="Datum" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
-                <DatePicker fx:id="datePicker" maxWidth="Infinity"/>
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Datum" />
+                <DatePicker fx:id="datePicker" maxWidth="Infinity" />
             </VBox>
 
             <VBox spacing="5">
-                <Label text="Locatie" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
-                <TextField fx:id="txtLocatie" promptText="bv. Klimax"/>
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Locatie" />
+                <TextField fx:id="txtLocatie" promptText="bv. Klimax" />
             </VBox>
 
             <VBox spacing="5">
-                <Label text="Graad" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
-                <TextField fx:id="txtGraad" promptText="bv. 6b"/>
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Graad" />
+                <TextField fx:id="txtGraad" promptText="bv. 6b" />
             </VBox>
 
             <VBox spacing="5">
-                <Label text="Type" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
-                <ComboBox fx:id="comboType" maxWidth="Infinity"/>
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Type" />
+                <ComboBox fx:id="comboType" maxWidth="Infinity" />
             </VBox>
 
             <VBox spacing="5">
-                <Label text="Notities" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
-                <TextArea fx:id="txtNotities" promptText="Hoe voelde het?" prefRowCount="3" wrapText="true"/>
+                <Label style="-fx-text-fill: #666; -fx-font-size: 12px;" text="Notities" />
+                <TextArea fx:id="txtNotities" prefRowCount="3" promptText="Hoe voelde het?" wrapText="true" />
             </VBox>
 
-            <Region VBox.vgrow="ALWAYS" /> <Button text="Voeg Sessie Toe" onAction="#onVoegToe"
-                                                   maxWidth="Infinity" styleClass="button, button-primary"/>
+            <Region VBox.vgrow="ALWAYS" /> <Button maxWidth="Infinity" onAction="#onVoegToe" styleClass="button, button-primary" text="Voeg Sessie Toe" />
         </VBox>
     </left>
 
     <center>
         <VBox spacing="20">
-            <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+            <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
 
-            <TabPane VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+            <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                 <tabs>
                     <Tab text="Lijstweergave">
                         <content>
                             <VBox style="-fx-padding: 10;">
-                                <ListView fx:id="listSessies" VBox.vgrow="ALWAYS" style="-fx-background-insets: 0; -fx-padding: 5;"/>
+                                <ListView fx:id="listSessies" style="-fx-background-insets: 0; -fx-padding: 5;" VBox.vgrow="ALWAYS" />
                             </VBox>
                         </content>
                     </Tab>
                     <Tab text="Progressie Grafiek">
                         <content>
                             <VBox style="-fx-padding: 10;">
-                                <LineChart fx:id="progressieGrafiek" title="Mijn Evolutie" legendVisible="false">
+                                <LineChart fx:id="progressieGrafiek" legendVisible="false" title="Mijn Evolutie">
                                     <xAxis>
-                                        <CategoryAxis label="Datum" fx:id="dateAxis"/>
+                                        <CategoryAxis fx:id="dateAxis" label="Datum" />
                                     </xAxis>
                                     <yAxis>
-                                        <NumberAxis label="Niveau" fx:id="gradeAxis" autoRanging="true" forceZeroInRange="false"/>
+                                        <NumberAxis fx:id="gradeAxis" autoRanging="true" forceZeroInRange="false" label="Niveau" />
                                     </yAxis>
                                 </LineChart>
                             </VBox>
@@ -77,14 +70,13 @@
                 </tabs>
             </TabPane>
 
-            <VBox spacing="10" styleClass="card">
+            <VBox prefHeight="395.0" prefWidth="651.0" spacing="10" styleClass="card">
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Label text="AI Coach Advies" styleClass="sub-header-label"/>
-                    <Region HBox.hgrow="ALWAYS"/>
-                    <Button text="Vraag AI Analyse" onAction="#onVraagAi" styleClass="button, button-secondary"/>
+                    <Label styleClass="sub-header-label" text="AI Coach Advies" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button onAction="#onVraagAi" styleClass="button, button-secondary" text="Vraag AI Analyse" />
                 </HBox>
-                <TextArea fx:id="txtAiAdvies" editable="false" wrapText="true" prefHeight="80"
-                          promptText="Druk op de knop voor advies..." style="-fx-background-color: transparent;"/>
+                <TextArea fx:id="txtAiAdvies" editable="false" prefHeight="187.0" prefWidth="621.0" promptText="Druk op de knop voor advies..." style="-fx-background-color: transparent;" wrapText="true" />
             </VBox>
 
         </VBox>
