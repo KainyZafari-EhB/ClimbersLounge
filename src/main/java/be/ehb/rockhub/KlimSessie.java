@@ -8,16 +8,18 @@ public class KlimSessie {
     private String graad; // bv. "6a+"
     private String type;  // bv. "Boulderen", "Lead"
     private String notities;
+    private String duration;
 
     public KlimSessie(){
 
     }
-    public KlimSessie(LocalDate datum, String locatie, String graad, String type, String notities) {
+    public KlimSessie(LocalDate datum, String locatie, String graad, String type, String notities, String duration) {
         this.datum = datum;
         this.locatie = locatie;
         this.graad = graad;
         this.type = type;
         this.notities = notities;
+        this.duration = duration;
     }
 
     // Getters zijn VERPLICHT voor Jackson JSON export
@@ -26,4 +28,5 @@ public class KlimSessie {
     public String getGraad() { return graad; }
     public String getType() { return type; }
     public String getNotities() { return notities; }
+    public String getDuration() { return duration; }
 }

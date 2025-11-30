@@ -33,11 +33,12 @@ public class DashboardController {
     @FXML private TextField txtGraad;
     @FXML private ComboBox<String> comboType;
     @FXML private TextArea txtNotities;
+    @FXML private TextField txtDuration;
     @FXML private ListView<String> listSessies; // Simpele weergave
     @FXML private TextArea txtAiAdvies;
     @FXML private NumberAxis gradeAxis;
     @FXML private LineChart<String, Number> progressieGrafiek;
-    @FXML private CategoryAxis dateAxis;
+
     private final File dataFile = new File("klim_sessies.json");
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -66,11 +67,13 @@ public class DashboardController {
                 txtLocatie.getText(),
                 txtGraad.getText(),
                 comboType.getValue(),
-                txtNotities.getText()
+                txtNotities.getText(),
+                txtDuration.getText()
         );
 
         sessieLijst.add(nieuweSessie);
-        listSessies.getItems().add(nieuweSessie.getDatum() + ": " + nieuweSessie.getGraad() + " (" + nieuweSessie.getType() + ")");
+        listSessies.getItems().add(nieuweSessie.getDatum() + ": " + nieuweSessie.getLocatie() + " " + nieuweSessie.getGraad() + " " + nieuweSessie.getDuration() + " (" + nieuweSessie.getType() + ")");
+
 
         slaSessiesOp();
 
@@ -168,7 +171,7 @@ public class DashboardController {
 
             // Update ook de zichtbare lijst in de UI
             for (KlimSessie k : sessieLijst) {
-                listSessies.getItems().add(k.getDatum() + ": " + k.getGraad() + " (" + k.getType() + ")");
+                listSessies.getItems().add(k.getDatum() + ": " + k.getLocatie() + " " + k.getGraad() + " " + k.getDuration() + " (" + k.getType() + ")");
             }
 
             System.out.println("Data succesvol geladen: " + sessieLijst.size() + " sessies.");
